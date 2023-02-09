@@ -1,0 +1,13 @@
+
+[Unit]
+Description=Email on boot
+After=network.target
+
+[Service]
+Type=oneshot
+User=goastler
+ExecStart=/bin/bash --verbose -c "while ! echo \"Subject: $$(hostname) booted\" | sendmail goastler4@gmail.com; do sleep 10s; done"
+
+[Install]
+WantedBy=multi-user.target
+
